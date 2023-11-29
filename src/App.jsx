@@ -2,13 +2,17 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import smoothscroll from "smoothscroll-polyfill"
+import smoothscroll from "smoothscroll-polyfill";
+import ReactGA from 'react-ga';
 import "./App.css"
 import Home from "./components/Home/Home";
 import Blog from "./components/Blog/Blog";
 import Contact from "./components/Contact/Contact";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Gallery from "./components/Gallery/Gallery";
+
+const TRACKING_ID = "G-5RKW7FN08B";
+ReactGA.initialize(TRACKING_ID);
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -17,6 +21,8 @@ function App() {
   smoothscroll.polyfill();
 
   useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+
     const handleResize = () => {
       setIsMobile(window.innerWidth < 900);
     }
