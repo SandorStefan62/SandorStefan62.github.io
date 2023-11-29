@@ -2,6 +2,7 @@
   "name": "temapiug",
   "private": false,
   "version": "0.0.0",
+  "homepage": "https://sandorstefan62.github.io/react-vite-project",
   "type": "module",
   "scripts": {
     "dev": "vite",
