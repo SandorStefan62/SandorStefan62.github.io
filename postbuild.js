@@ -22,6 +22,7 @@ async function updateFile() {
 
         fileContent = fileContent.replace(/holistic\./g, '');
         fileContent = fileContent.replace(/ei\./g, '');
+        console.log(fileContent);
 
         await fs.writeFile(filePath, fileContent, 'utf8');
 
