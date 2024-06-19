@@ -10,7 +10,7 @@ const distDir = path.join(__dirname, 'dist', 'assets');
 async function updateFile() {
     try {
         const files = await fs.readdir(distDir);
-        const fileName = files.find(file => file.endsWith('.js'));
+        const fileName = files.find(file => file.startsWith('index-') && file.endsWith('.js'));
 
         if (!fileName) {
             console.error('Built javascript file not found');
