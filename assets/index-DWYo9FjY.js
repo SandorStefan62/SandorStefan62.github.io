@@ -35995,7 +35995,7 @@ var holistic = {};
     this.h = new Rd2({
       locateFile: a.locateFile,
       files: [{ url: "holistic_solution_packed_assets_loader.js" }, { simd: false, url: "holistic_solution_wasm_bin.js" }, { simd: true, url: "holistic_solution_simd_wasm_bin.js" }],
-      graph: { url: "holistic.binarypb" },
+      graph: { url: "binarypb" },
       inputs: { image: { type: "video", stream: "input_frames_gpu" } },
       listeners: [{ wants: "left_hand_landmarks right_hand_landmarks face_landmarks pose_landmarks world_landmarks segmentation_mask image_transformed multi_face_geometry".split(" "), outs: { image: {
         type: "texture",
@@ -103759,17 +103759,17 @@ function DetectareHolistica({ onPredictionChange }) {
       const filteredLandmarks = removeElements(results.poseLandmarks, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]);
       drawing_utils.drawLandmarks(
         canvasCtx,
-        filteredLandmarks.filter((_2, index) => Object.values(holistic.POSE_LANDMARKS_LEFT).includes(index)),
+        filteredLandmarks.filter((_2, index) => Object.values(POSE_LANDMARKS_LEFT).includes(index)),
         { visibilityMin: 0.65, color: "white", fillColor: "rgb(86, 227, 159)" }
       );
       drawing_utils.drawLandmarks(
         canvasCtx,
-        filteredLandmarks.filter((_2, index) => Object.values(holistic.POSE_LANDMARKS_RIGHT).includes(index)),
+        filteredLandmarks.filter((_2, index) => Object.values(POSE_LANDMARKS_RIGHT).includes(index)),
         { visibilityMin: 0.65, color: "white", fillColor: "rgb(0, 217, 231)" }
       );
     }
     if (results.rightHandLandmarks) {
-      drawing_utils.drawConnectors(canvasCtx, results.rightHandLandmarks, holistic.HAND_CONNECTIONS, { color: "white" });
+      drawing_utils.drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS, { color: "white" });
       drawing_utils.drawLandmarks(canvasCtx, results.rightHandLandmarks, {
         color: "white",
         fillColor: "rgb(0,217,231)",
@@ -103778,7 +103778,7 @@ function DetectareHolistica({ onPredictionChange }) {
       });
     }
     if (results.leftHandLandmarks) {
-      drawing_utils.drawConnectors(canvasCtx, results.leftHandLandmarks, holistic.HAND_CONNECTIONS, { color: "white" });
+      drawing_utils.drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS, { color: "white" });
       drawing_utils.drawLandmarks(canvasCtx, results.leftHandLandmarks, {
         color: "white",
         fillColor: "rgb(86, 227, 159)",
@@ -103787,13 +103787,13 @@ function DetectareHolistica({ onPredictionChange }) {
       });
     }
     if (results.faceLandmarks) {
-      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, holistic.FACEMESH_TESSELATION, { color: "#C0C0C070", lineWidth: 1 });
-      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, holistic.FACEMESH_RIGHT_EYE, { color: "rgb(0,217,231)" });
-      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, holistic.FACEMESH_RIGHT_EYEBROW, { color: "rgb(0,217,231)" });
-      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, holistic.FACEMESH_LEFT_EYE, { color: "rgb(86, 227, 159)" });
-      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, holistic.FACEMESH_LEFT_EYEBROW, { color: "rgb(86, 227, 159)" });
-      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, holistic.FACEMESH_FACE_OVAL, { color: "#E0E0E0", lineWidth: 5 });
-      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, holistic.FACEMESH_LIPS, { color: "#E0E0E0", lineWidth: 5 });
+      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_TESSELATION, { color: "#C0C0C070", lineWidth: 1 });
+      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_RIGHT_EYE, { color: "rgb(0,217,231)" });
+      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_RIGHT_EYEBROW, { color: "rgb(0,217,231)" });
+      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_LEFT_EYE, { color: "rgb(86, 227, 159)" });
+      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_LEFT_EYEBROW, { color: "rgb(86, 227, 159)" });
+      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_FACE_OVAL, { color: "#E0E0E0", lineWidth: 5 });
+      drawing_utils.drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_LIPS, { color: "#E0E0E0", lineWidth: 5 });
     }
     canvasCtx.restore();
     if (model) {
@@ -103825,7 +103825,7 @@ function DetectareHolistica({ onPredictionChange }) {
     loadModel();
     if (modelLoaded) {
       if (effectRan.current === false) {
-        const holistic$1 = new holistic.Holistic({
+        const holistic$1 = new Holistic({
           locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`
         });
         holistic$1.setOptions({
