@@ -20,6 +20,7 @@ async function updateFile() {
         const filePath = path.join(distDir, fileName);
         let fileContent = await fs.readFile(filePath, 'utf8');
 
+        fileContent = fileContent.replace(/holistic\./g, '');
         fileContent = fileContent.replace(/ei\./g, '');
 
         await fs.writeFile(filePath, fileContent, 'utf8');
